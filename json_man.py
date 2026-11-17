@@ -57,7 +57,6 @@ def get_services_message() -> str:
         if not services:
             return "📋 У прайс-листі поки немає активних послуг."
 
-
         message = "📋 <b>Актуальний прайс-лист BotForge:</b>\n\n"
 
         for service in services:
@@ -67,17 +66,19 @@ def get_services_message() -> str:
             days = service.get("delivery_time_days", 1)
             description = service.get("description", "")
 
-        message += f"🛠 <b>{title}</b>\n"
-        message += (
-            f"💰 <b>Ціна:</b> ${price_usd} (~{price_uah} грн)\n"
-            f"⏱ <b>Термін:</b> від {days} днів\n"
-        )
+            message += f"🛠 <b>{title}</b>\n"
+            message += (
+                f"💰 <b>Ціна:</b> ${price_usd} (~{price_uah} грн)\n"
+                f"⏱ <b>Термін:</b> від {days} днів\n"
+            )
 
-        if description:
-            message += f"📝 <i>{description}</i>\n"
+            if description:
+                message += f"📝 <i>{description}</i>\n"
 
 
-        message += "\n" + "—" * 20 + "\n\n"
+            message += "\n" + "—" * 20 + "\n\n"
+            
         message += "👇 <i>Обирай потрібну послугу та зв'язуйся для замовлення!</i>"
 
         return message
+
