@@ -1,7 +1,7 @@
 import config
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
-from reply import start_keyboard
+from keyboards import start_keyboard
 
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):

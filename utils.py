@@ -9,12 +9,23 @@ def load_services():
     if not os.path.exists(JSON_FILE):
         return []
 
-    with open(JSON_FILE, "r", encoding="utf-8") as file:
+    with open(JSON_FILE, "r", encoding="UTF-8") as file:
         try:
             data = json.load(file)
             return data.get("services", [])
         except json.JSONDecodeError:
             return []
+
+def load_services_2():
+    if not os.path.exists(JSON_FILE):
+        return {}
+
+    with open(JSON_FILE, "r", encoding="UTF-8") as file:
+        data = json.load(file)
+        services_list = data["services"]
+
+    services_dict = {int(service["id"]): service for service in services_list}
+    return services_dict
 
 
 def add_service(title, category, description, delivery_time_days, price_usd, price_uah):
@@ -41,7 +52,7 @@ def add_service(title, category, description, delivery_time_days, price_usd, pri
 
     print(f"Послугу «{title}» успішно додано до файлу {JSON_FILE}!")
 
-def get_services_message() -> str:
+def get_services_message():
     if not os.path.exists(JSON_FILE):
         return (
             "📋 <b>Прайс-лист наразі оновлюється.</b>\n\nСлідкуйте за оновленнями! 🚀"
@@ -73,12 +84,8 @@ def get_services_message() -> str:
             )
 
             if description:
-                message += f"📝 <i>{description}</i>\n"
+                message += f"📝 <i>{description}</i>\n\n"
 
-
-            message += "\n" + "—" * 20 + "\n\n"
-            
-        message += "👇 <i>Обирай потрібну послугу та зв'язуйся для замовлення!</i>"
+        message += "👇 <b>Обирай потрібного бота нижче:</b>"
 
         return message
-
